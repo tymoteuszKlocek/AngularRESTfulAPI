@@ -1,0 +1,36 @@
+<md-content ng-controller="DialogCtrl as dialog" >
+
+    <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-cols-lg="4" md-cols-gt-lg="5" md-row-height="25em" md-gutter="3" >
+
+        <md-grid-tile ng-repeat="movie in MainCtrl.movies | orderBy : orderProp | filter : query | startPaginationFrom : MainCtrl.currentPage * MainCtrl.pageSize | limitTo : MainCtrl.pageSize ">
+
+            <div class="tile-content" layout-align="center center">
+
+                <div ng-click="dialog.showAdvanced($event)">
+                    <a href=""><img class="img-box" ng-src="{{ movie.thumbUrl }}" ng-click="MainCtrl.takeThisVideoid(movie)" alt="{{ movie.title }}" ></a>
+                </div>
+                    <!-- play button for ng-view-->
+                    <div flex-xs="0">
+                        <md-button class="play-button" ng-click="MainCtrl.takeThisVideoidForParams(movie)">Play</md-button>
+                    </div>
+               
+                <p class="ptile">{{ movie.description }}</p>
+                <p>Favorite movie: {{ movie.favorite | checkmark }}</p> 
+                <p>Likes: {{ movie.likeCount }} Views: {{ movie.viewCount }}</p>
+                <p>Date: {{ movie.date }}</p>
+
+                <md-grid-tile-footer>
+                    <section layout="row" layout-align="center center" >
+                        <div ng-click="dialog.showAdvanced($event)">
+                            <md-button class="md-primary " ng-click="MainCtrl.takeThisVideoid(movie)" >Play</md-button>
+                        </div>
+
+                        <md-button ng-click="MainCtrl.addToFavorites(movie)" class="md-primary md-hue-2">Favorites</md-button>
+
+                        <md-button ng-click="MainCtrl.deleteItem(movie)" class="md-warn">Remove</md-button>
+                    </section>
+                </md-grid-tile-footer>
+            </div>
+        </md-grid-tile>
+    </md-grid-list>
+</md-content>

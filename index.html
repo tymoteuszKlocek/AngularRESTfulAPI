@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./bower_components/angular-material/angular-material.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
+    <title>FilmWeb2</title>
+</head>
+<body ng-controller="MainCtrl as MainCtrl" ng-cloak>
+    <a href="/#/">
+        <md-toolbar md-scroll-shrink md-shrink-speed-factor="0.5" id="top" layout-padding>
+            <h3><span>FimWeb2</span></h3>
+            <span flex>the real alternative for FilmWeb</span>
+        </md-toolbar>
+    </a>
+    <md-card>       
+        <md-input-container>
+            <label>Past your film url or videoId (from YouTube or Vimeo)</label>
+            <input ng-model="MainCtrl.pastedUrl" type="text" >
+        </md-input-container>
+        
+        <md-container>
+            <md-button class="md-raised" ng-click="MainCtrl.useUrl()">Add to list</md-button>
+            <md-button class="md-raised" ng-click="MainCtrl.deleteStorage()">Remove list</md-button>
+            <md-button ng-click="MainCtrl.demoButton()" class="md-raised" style="background: pink">DEMO</md-button>
+            <md-button class="viewButtons" ui-sref="grid">Grid</md-button>
+            <md-button class="viewButtons" ui-sref="list">List</md-button>
+        </md-container>
+        <!-- search engine -->
+        <md-container>
+            <div layout-margin layout="row" layout-wrap>
+                <md-input-container flex="20" flex-xs="33">
+                    <label> Search: </label>
+                    <input ng-model="query">
+                </md-input-container>
+                <md-input-container  flex="20" flex-xs="33">
+                    <label> Sort by </label>
+                    <md-select ng-model="orderProp">
+                        <md-option value="title">Alphabetical</md-option>
+                        <md-option value="-date">Newest</md-option>
+                        <md-option value="date">Oldest</md-option>
+                        <md-option value="-favorite">Favorite first</md-option>
+                    </md-select>
+                </md-input-container>
+                <!-- pagination -->
+                <md-input-container flex="20" flex-xs="33">
+                    <md-select ng-model="MainCtrl.pageSize" placeholder="Items per page" aria-label>
+                        <md-option ng-value=5>5</md-option>
+                        <md-option ng-value=10>10</md-option>
+                        <md-option ng-value=15>15</md-option>
+                        <md-option ng-value=20>20</md-option>
+                        <md-option ng-value=50>50</md-option>
+                        <md-option ng-value=100>100</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <md-button ng-disabled="MainCtrl.currentPage == 0" ng-click="MainCtrl.currentPage = MainCtrl.currentPage - 1">Previous</md-button>
+            {{ MainCtrl.currentPage + 1 }}/{{ MainCtrl.numberOfPages() }}
+            <md-button ng-disabled="MainCtrl.currentPage + 1 >= MainCtrl.numberOfPages()" ng-click="MainCtrl.currentPage=MainCtrl.currentPage+1">Next</md-button>
+        <md-container>
+        <!-- list/grid view -->
+        <div ui-view></div>
+    </md-card>
+    <script src="./bower_components/angular/angular.js" type="text/javascript" ></script>
+    <script src="./bower_components/angular-route/angular-route.js" type="text/javascript" ></script>
+    <script src="./bower_components/angular-animate/angular-animate.js" type="text/javascript" ></script>
+    <script src="./bower_components/angular-aria/angular-aria.js" type="text/javascript" ></script>
+    <script src="./bower_components/angular-material/angular-material.js" type="text/javascript" ></script>
+    <script src="./bower_components/ngstorage/ngStorage.min.js" type="text/javascript" ></script>
+    <script src="./bower_components/angular-ui-router/release/angular-ui-router.min.js" type="text/javascript" ></script>
+    <!-- dodaję trzy moduly do strony -->
+    <script>
+        angular.element(document).ready(function() {
+          angular.bootstrap(document, ['myApp', 'ytApp', 'vimeoApp']);
+        });
+    </script>
+    <script src="js/myApp.js" ></script>
+    <script src="js/youtubeModule/ytApp.js"></script>
+    <script src="js/vimeoModule/vimeoApp.js"></script>
+    <script src="js/controllers/MainCtrl.js" ></script>
+    <script src="js/controllers/DialogCtrl.js" ></script>
+    <script src="js/filters/startPaginationFrom.js" ></script>
+    <script src="js/filters/checkmark.js" ></script>
+    <script src="js/directives/player.js" ></script>  
+    <script src="js/factories/dataReceiver.js" ></script>
+    <script src="js/factories/SharedService.js" ></script>
+    <script src="js/youtubeModule/youtube.js"></script>
+    <script src="js/vimeoModule/vimeo.js"></script>
+    <script src="js/factories/storage.js" ></script>
+    <script src="js/factories/favorites.js" ></script>
+    <script src="js/factories/demoButton.js" ></script>   
+    <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+</body>
+</html>
