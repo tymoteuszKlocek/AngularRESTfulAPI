@@ -1,0 +1,25 @@
+{
+  "name": "angular-js-video-store",
+  "version": "1.0.0",
+  "description": "rest api angularjs",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tymoteuszKlocek/AngularRESTfulAPI.git"
+  },
+  "keywords": [
+    "angular",
+    "js",
+    "rest",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tymoteuszKlocek/AngularRESTfulAPI/issues"
+  },
+  "homepage": "https://github.com/tymoteuszKlocek/AngularRESTfulAPI#readme"
+}
